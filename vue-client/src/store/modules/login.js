@@ -1,20 +1,12 @@
-import { createApp } from "vue";
-import { createStore } from "vuex";
-import App from "../App.vue";
-import AuthApi from "./AuthApi.js";
 import axios from "axios";
-import env from "./env.js";
-import createPersistedState from "vuex-persistedstate";
+import env from "../../config/env.js";
 
-const Store = createStore({
-    plugins: [createPersistedState()],
-
-    state() {
-        return {
-            token_response: {},
-            current_user: null,
-        }
+export const login = {
+    state: {
+        token_response: {},
+        current_user: null,
     },
+
     actions: {
         login(context, user) {
             return new Promise((resolve, reject) => {
@@ -26,9 +18,9 @@ const Store = createStore({
                     password: user.password,
                 };
 
-                axios.post(AuthApi.GET_TOKEN, data)
+                axios.post('oauth/token', data)
                     .then((response) => {
-                        context.commit("updateTokens", response.data);
+                        context.commit("updateTokenResponse", response.data);
                         axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.access_token}`;
                         resolve(response);
                     }).catch((login_error) => {
@@ -39,7 +31,7 @@ const Store = createStore({
 
         getCurrentUser(context) {
             return new Promise((resolve, reject) => {
-                axios.get(AuthApi.USER)
+                axios.get('api/user')
                     .then((response) => {
                         context.commit("updateCurrentUser", response.data);
                         resolve(response);
@@ -59,32 +51,30 @@ const Store = createStore({
                 reject(login_error);
             });
         },
+
     },
+
     mutations: {
-        updateTokens(state, tokens) {
-            state.tokens = tokens;
+        updateTokenResponse(state, token_response) {
+            state.token_response = token_response;
         },
 
-        updateCurrentUser(state, currentUser) {
-            state.currentUser = currentUser;
+        updateCurrentUser(state, current_user) {
+            state.current_user = current_user;
         },
 
         logout(state) {
-            state.currentUser = null;
-            state.tokens = {};
+            state.current_user = null;
+            state.token_response = {};
         },
     },
+
     getters: {
         getAccessToken(state) {
-            return state.tokens.access_token;
+            return state.token_response.access_token;
         },
         getCurrentUser(state) {
-            return state.currentUser;
+            return state.current_user;
         },
     },
-});
-
-const app = createApp(App);
-app.use(Store);
-
-export default Store;
+};
