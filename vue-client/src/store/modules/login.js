@@ -5,6 +5,7 @@ export const login = {
     state: {
         token_response: {},
         current_user: null,
+        is_loading: false
     },
 
     actions: {
@@ -76,5 +77,8 @@ export const login = {
         getCurrentUser(state) {
             return state.current_user;
         },
-    },
+        getTest() {
+            return "test";
+        },
+    }
 };

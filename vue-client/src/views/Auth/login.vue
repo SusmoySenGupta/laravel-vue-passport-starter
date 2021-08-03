@@ -24,7 +24,7 @@
             <button type="submit" class="mt-6 inline-flex items-center justify-center w-full flex-none bg-gray-900 hover:bg-gray-700 text-gray-100 text-sm leading-6 font-semibold py-2 px-4 border border-transparent rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none transition-colors duration-300">
                 <span v-if="!is_loading">Log In</span> 
                 <span v-else>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-spin" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-spin" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
                     </svg>
                 </span> 
@@ -43,38 +43,12 @@
         </p>
     </div>
 </template>
+
 <script setup>
 import {ref} from "vue";
-import {useStore} from "vuex";
-import {useRouter} from "vue-router";
+import useLogin from "../../services/useLogin.js";
 import BackendErrorShow from "../../components/BackendErrorShow.vue";
 
 const user = ref({email: "admin@example.com", password: "secret"});
-const is_loading = ref(false);
-const errors = ref(null);
-const store = useStore();
-const router = useRouter();
-
-// function to handle the login
-function login(user) {
-    delete axios.defaults.headers.common["Authorization"];
-    is_loading.value = true;
-
-    store.dispatch("login", user).then(() => {
-        store.dispatch("getCurrentUser").then((current_user_response) => {
-            const ROLE = current_user_response.data.role;
-            if (ROLE === "admin") router.push({ name: "admin.home" });
-            else if (ROLE === "user") router.push({ name: "user.home" });
-            else if (ROLE === "another_user") router.push({ name: "anotheruser.home" });
-            is_loading.value = false;
-        }).catch((get_current_user_error) => {
-            errors.value = get_current_user_error.response.data;
-            is_loading.value = false;
-        });
-    })
-    .catch((login_error) => {
-        errors.value = login_error.response.data;
-        is_loading.value = false;
-    });
-}
+const {login, is_loading, errors} = useLogin();
 </script>
