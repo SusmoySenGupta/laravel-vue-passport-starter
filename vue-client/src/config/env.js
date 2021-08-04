@@ -1,5 +1,5 @@
 class env {
-    static BASE_API_URL = "http://localhost:8000/"
+    static BASE_API_URL = "https://susmoycse.com/laravel-vue/passport-starter-with-welcome-email/server/"
 
     static CLIENT_ID = 2
     static GRANT_TYPE = "password"

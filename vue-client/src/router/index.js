@@ -5,7 +5,7 @@ import AnotherUserRoutes from "./anotheruser.js";
 import UserRoutes from "./user.js";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory('/laravel-vue/passport-starter-with-welcome-email/'),
     routes: [{
             path: "/",
             name: "welcome",
