@@ -15,11 +15,11 @@
         <form class="mt-6" @submit.prevent="login(user)">
             <div>
                 <label class="mb-1 block text-sm leading-relaxed tracking-tight text-gray-700 dark:text-gray-100">Email Address</label>
-                <input type="email" v-model="user.email" required placeholder="Your Email" class="w-full px-4 py-2 text-gray-100 transition duration-300 ease-in-out transform border-transparent rounded-md bg-gray-600 focus:border-gray-600 focus:bg-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none">
+                <input type="email" v-model="user.email" required placeholder="Your Email" class="w-full px-4 py-2 dark:text-gray-100 transition duration-300 ease-in-out transform border-transparent rounded-md bg-gray-100 dark:bg-gray-600 dark:focus:border-gray-600 dark:focus:bg-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none">
             </div>
             <div class="mt-4">
                 <label class="mb-1 block text-sm leading-relaxed tracking-tight text-gray-700 dark:text-gray-100">Password</label>
-                <input type="password" v-model="user.password" required minlength="6" placeholder="Your Password" class="w-full px-4 py-2 text-gray-100 transition duration-300 ease-in-out transform border-transparent rounded-md bg-gray-600 focus:border-gray-600 focus:bg-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none">
+                <input type="password" v-model="user.password" required minlength="6" placeholder="Your Password" class="w-full px-4 py-2 dark:text-gray-100 transition duration-300 ease-in-out transform border-transparent rounded-md bg-gray-100 dark:bg-gray-600 dark:focus:border-gray-600 dark:focus:bg-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none">
             </div>
             <button type="submit" class="mt-6 inline-flex items-center justify-center w-full flex-none bg-gray-900 hover:bg-gray-700 text-gray-100 text-sm leading-6 font-semibold py-2 px-4 border border-transparent rounded-lg focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-blue-600 focus:outline-none transition-colors duration-300">
                 <span v-if="!is_loading">Login</span> 
