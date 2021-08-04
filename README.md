@@ -13,7 +13,13 @@ This is a laravel-vue starter app with built-in role-based authentication.
 ## Demo
 
 `Link:` 
-<a href="http://susmoycse.com/laravel-vue/passport-starter-with-welcome-email/" target="_blank">laravel-vue-passport-starter</a>  
+<a href="http://susmoycse.com/laravel-vue/passport-starter-with-welcome-email/" target="_blank">laravel-vue-passport-starter</a> 
+
+`Email: admin@example.com`
+`password: secret`
+
+`Email: user@example.com`
+`password: secret`
 
 
 ## Installation
